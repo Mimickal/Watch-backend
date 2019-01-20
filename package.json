@@ -1,0 +1,17 @@
+{
+  "name": "funbox-watch-backend",
+  "version": "1.0.0",
+  "description": "Funbox watch backend",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "knex migrate:latest"
+  },
+  "author": "Mimickal",
+  "license": "MIT",
+  "dependencies": {
+    "bookshelf": "^0.14.2",
+    "knex": "^0.14.6",
+    "sqlite3": "^4.0.6"
+  }
+}

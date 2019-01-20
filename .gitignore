@@ -1,0 +1,8 @@
+# Node stuff
+node_modules
+
+# Dev stuff
+dev.sqlite3
+
+# Vim
+*.swp
