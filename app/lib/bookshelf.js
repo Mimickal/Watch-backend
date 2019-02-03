@@ -1,0 +1,12 @@
+const config = require('../../config');
+const knex = require('knex')(config);
+
+knex.raw('PRAGMA foreign_keys = ON;')
+	.catch(console.error);
+
+const Bookshelf = require('bookshelf')(knex);
+
+Bookshelf.plugin('pagination');
+
+module.exports = Bookshelf;
+
