@@ -17,7 +17,7 @@ exports.up = function(knex, Promise) {
 			table.string('title').notNullable();
 			table.string('title_normalized').notNullable();
 			table.date('date_added').defaultTo(knex.fn.now()).notNullable();
-			table.integer('runtime').notNullable();
+			table.integer('runtime').nullable();
 		})
 		.createTable('Series', table => {
 			table.increments('id').primary();

@@ -5,6 +5,7 @@ const testdata = require('../../seed/test/data/test_data');
 
 const MediaInfo = require('../../app/models/MediaInfo');
 const Media = require('../../app/models/Media');
+const Series = require('../../app/models/Series');
 
 describe('Models', function() {
 
@@ -17,7 +18,7 @@ describe('Models', function() {
 	});
 
 	describe('MediaInfo', function() {
-		it('Getting MedaiInfo record', async function() {
+		it('Fetching MedaiInfo record', async function() {
 			let gotModel = await MediaInfo
 				.where({id: testdata.mediaInfo[0].id})
 				.fetch();
@@ -36,6 +37,17 @@ describe('Models', function() {
 
 			let gotInfo = gotMedia.toJSON().info;
 			expect(gotInfo).to.deep.equal(testdata.mediaInfo[0]);
+		});
+	});
+
+	describe('Series', function() {
+		it('Fetching Series record', async function() {
+			let gotModel = await Series
+				.where({id: testdata.series[0].id})
+				.fetch();
+
+			let gotSeries = gotModel.toJSON();
+			expect(gotSeries).to.deep.equal(testdata.series[0]);
 		});
 	});
 
