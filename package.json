@@ -4,7 +4,7 @@
   "description": "Funbox watch backend",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_ENV=test mocha --recursive --exit",
     "migrate": "knex migrate:latest"
   },
   "author": "Mimickal",
@@ -13,5 +13,9 @@
     "bookshelf": "^0.14.2",
     "knex": "^0.14.6",
     "sqlite3": "^4.0.6"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
   }
 }
