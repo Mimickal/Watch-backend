@@ -46,9 +46,23 @@ describe('Models', function() {
 				.where({id: testdata.series[0].id})
 				.fetch();
 
+			// TODO validate date
 			let gotSeries = gotModel.toJSON();
 			expect(gotSeries).to.deep.equal(testdata.series[0]);
 		});
+
+		it('Fetching associated Media', async function() {
+			let gotModel = await Series
+				.where({id: testdata.series[0].id})
+				.fetch({withRelated: 'media'});
+
+			let gotSeries = gotModel.toJSON();
+			expect(gotSeries.media).to.deep.equal(testdata.media[1]);
+		});
+
+		it.skip('Fetch associated Episodes');
+
+		it.skip('Fetch associated Episodes for season');
 	});
 
 });

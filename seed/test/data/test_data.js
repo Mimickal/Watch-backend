@@ -34,7 +34,8 @@ const media2 = {
 	type: 2,
 	title: 'Media for Series 1',
 	title_normalized: 'Media for Series 1',
-	runtime: null
+	runtime: null,
+	date_added: ''
 };
 
 const series1 = {
