@@ -6,9 +6,9 @@ exports.seed = function(knex, Promise) {
 		knex('Media').truncate(),
 		knex('MediaInfo').truncate()
 	]).then(() => Promise.all([
-		...testdata.mediaInfo.map(info => knex('MediaInfo').insert(info)),
-		...testdata.media.map(media => knex('Media').insert(media)),
-		...testdata.series.map(series => knex('Series').insert(series))
+		...testdata.mediaInfo.map(info => knex('MediaInfo').insert(info.model())),
+		...testdata.media.map(media => knex('Media').insert(media.model())),
+		...testdata.series.map(series => knex('Series').insert(series.model()))
 	]));
 };
 

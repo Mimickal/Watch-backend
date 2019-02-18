@@ -20,11 +20,11 @@ describe('Models', function() {
 	describe('MediaInfo', function() {
 		it('Fetching MedaiInfo record', async function() {
 			let gotModel = await MediaInfo
-				.where({id: testdata.mediaInfo[0].id})
+				.where({id: testdata.mediaInfo1.id})
 				.fetch();
 			// TODO validate date
 			let gotInfo = gotModel.toJSON();
-			expect(gotInfo).to.deep.equal(testdata.mediaInfo[0]);
+			expect(gotInfo).to.deep.equal(testdata.mediaInfo1);
 		});
 	});
 
@@ -32,32 +32,32 @@ describe('Models', function() {
 		// TODO add test validating date
 		it('Fetching associated MediaInfo', async function() {
 			let gotMedia = await Media
-				.where({id: testdata.media[0].id})
+				.where({id: testdata.media1.id})
 				.fetch({withRelated: 'info'});
 
 			let gotInfo = gotMedia.toJSON().info;
-			expect(gotInfo).to.deep.equal(testdata.mediaInfo[0]);
+			expect(gotInfo).to.deep.equal(testdata.media1.info);
 		});
 	});
 
 	describe('Series', function() {
 		it('Fetching Series record', async function() {
 			let gotModel = await Series
-				.where({id: testdata.series[0].id})
+				.where({id: testdata.series1.id})
 				.fetch();
 
 			// TODO validate date
 			let gotSeries = gotModel.toJSON();
-			expect(gotSeries).to.deep.equal(testdata.series[0]);
+			expect(gotSeries).to.deep.equal(testdata.series1.model());
 		});
 
 		it('Fetching associated Media', async function() {
 			let gotModel = await Series
-				.where({id: testdata.series[0].id})
+				.where({id: testdata.series1.id})
 				.fetch({withRelated: 'media'});
 
 			let gotSeries = gotModel.toJSON();
-			expect(gotSeries.media).to.deep.equal(testdata.media[1]);
+			expect(gotSeries.media).to.deep.equal(testdata.series1.media.model());
 		});
 
 		it.skip('Fetch associated Episodes');

@@ -3,6 +3,11 @@ const Info = gen.Info;
 const Media = gen.Media;
 const Series = gen.Series;
 
+const mediaInfo1 = new Info()
+	.withImdb('testimdb1')
+	.withScore(5.5, 8.8)
+	.withReleaseDate('')
+	.withPlot('Basic plot', 'Longer plot and stuff');
 
 const media1 = new Media()
 	.withTitle('Test Media 1')
@@ -26,10 +31,12 @@ const series1 = new Series()
 
 // Break nested objects out for seed functions
 module.exports = {
+	mediaInfo1: mediaInfo1,
 	media1: media1,
 	series1: series1,
 
 	mediaInfo: [
+		mediaInfo1,
 		media1.info,
 		series1.media.info
 	],
@@ -41,9 +48,4 @@ module.exports = {
 		series1
 	]
 };
-
-// Delete nested objects
-delete media1.info;
-delete series1.media.info;
-delete series1.media;
 

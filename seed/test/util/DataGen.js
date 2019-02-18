@@ -24,6 +24,17 @@ exports.Info = class {
 		this.date_release = date || null;
 		return this;
 	}
+	model() {
+		return {
+			id: this.id,
+			imdb_id: this.imdb_id,
+			score_imdb: this.score_imdb,
+			score_meta: this.score_meta,
+			date_release: this.date_release,
+			plot_short: this.plot_short,
+			plot_full: this.plot_full
+		};
+	}
 }
 
 exports.Media = class {
@@ -54,6 +65,17 @@ exports.Media = class {
 		this.info = info;
 		return this;
 	}
+	model() {
+		return {
+			id: this.id,
+			info_id: this.info_id,
+			type: this.type,
+			title: this.title,
+			title_normalized: this.title_normalized,
+			date_added: this.date_added,
+			runtime: this.runtime
+		};
+	}
 }
 
 exports.Series = class {
@@ -78,6 +100,13 @@ exports.Series = class {
 		this.series.push(episode);
 		return this;
 	}
+	model() {
+		return {
+			id: this.id,
+			media_id: this.media_id,
+			date_end: this.date_end
+		};
+	}
 }
 
 exports.Episode = class {
@@ -93,6 +122,15 @@ exports.Episode = class {
 		this.episode = episode;
 		this.season = season;
 		return this;
+	}
+	model() {
+		return {
+			id: this.id,
+			media_id: this.media_id,
+			series_id: this.series_id,
+			episode: this.episode,
+			season: this.season
+		};
 	}
 }
 
