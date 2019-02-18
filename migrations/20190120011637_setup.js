@@ -3,11 +3,11 @@ exports.up = function(knex, Promise) {
 	return knex.schema
 		.createTable('MediaInfo', table => {
 			table.increments('id').primary();
-			table.string('imdb_id', 9).unique();
-			table.decimal('score_imdb', 2, 1).unsigned();
-			table.decimal('score_meta', 2, 1).unsigned();
-			table.date('date_release');
-			table.string('plot_short', 200);
+			table.string('imdb_id', 9).unique().nullable();
+			table.decimal('score_imdb', 2, 1).unsigned().nullable();
+			table.decimal('score_meta', 2, 1).unsigned().nullable();
+			table.date('date_release').nullable();
+			table.string('plot_short', 200).nullable();
 			table.string('plot_full', 1000).nullable();
 		})
 		.createTable('Media', table => {
