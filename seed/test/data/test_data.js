@@ -2,6 +2,7 @@ const gen = require('../util/DataGen');
 const Info = gen.Info;
 const Media = gen.Media;
 const Series = gen.Series;
+const Episode = gen.Episode;
 
 const mediaInfo1 = new Info()
 	.withImdb('testimdb1')
@@ -27,6 +28,18 @@ const series1 = new Series()
 		.withInfo(new Info()
 			.withPlot('Info about series 1')
 		)
+	)
+	.withEpisode(new Episode()
+		.withNumber(1, 1)
+		.withMedia(new Media())
+	)
+	.withEpisode(new Episode()
+		.withNumber(2, 1)
+		.withMedia(new Media())
+	)
+	.withEpisode(new Episode()
+		.withNumber(1, 2)
+		.withMedia(new Media())
 	);
 
 // Break nested objects out for seed functions
@@ -42,10 +55,14 @@ module.exports = {
 	],
 	media: [
 		media1,
-		series1.media
+		series1.media,
+		...series1.episodes.map(episode => episode.media)
 	],
 	series: [
 		series1
+	],
+	episode: [
+		...series1.episodes
 	]
 };
 

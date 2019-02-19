@@ -60,7 +60,15 @@ describe('Models', function() {
 			expect(gotSeries.media).to.deep.equal(testdata.series1.media.model());
 		});
 
-		it.skip('Fetch associated Episodes');
+		it('Fetch associated Episodes', async function() {
+			let gotModel = await Series
+				.where({id: testdata.series1.id})
+				.fetch({withRelated: 'episodes'});
+
+			let gotSeries = gotModel.toJSON();
+			let episodes = testdata.series1.episodes.map(episode => episode.model());
+			expect(gotSeries.episodes).to.deep.equal(episodes);
+		});
 
 		it.skip('Fetch associated Episodes for season');
 	});

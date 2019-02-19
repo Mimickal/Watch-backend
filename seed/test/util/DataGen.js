@@ -40,6 +40,9 @@ exports.Info = class {
 exports.Media = class {
 	constructor(id) {
 		this.id = id || util.nextId('media');
+		this.type = 0;
+		this.title = 'Test title ' + this.id;
+		this.title_normalized = 'Test title ' + this.id;
 		this.date_added = '';
 		this.runtime = null;
 	}
@@ -94,10 +97,10 @@ exports.Series = class {
 	}
 	withEpisode(episode) {
 		episode.series_id = this.id;
-		if (!this.series) {
-			this.series = [];
+		if (!this.episodes) {
+			this.episodes = [];
 		}
-		this.series.push(episode);
+		this.episodes.push(episode);
 		return this;
 	}
 	model() {
