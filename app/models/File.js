@@ -1,9 +1,9 @@
 const bookshelf = require('../lib/bookshelf');
 
-const Media = require('./Media');
+const NAME = 'File';
 
-module.exports = bookshelf.Model.extend({
-	tableName: 'File',
+module.exports = bookshelf.model(NAME, {
+	tableName: NAME,
 	constructor: function() {
 		bookshelf.Model.apply(this, arguments);
 

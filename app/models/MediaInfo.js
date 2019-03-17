@@ -1,6 +1,8 @@
 const bookshelf = require('../lib/bookshelf');
 
-module.exports = bookshelf.Model.extend({
-	tableName: 'MediaInfo'
+const NAME = 'MediaInfo';
+
+module.exports = bookshelf.model(NAME, {
+	tableName: NAME
 });
 

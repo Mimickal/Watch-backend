@@ -1,15 +1,14 @@
 const bookshelf = require('../lib/bookshelf');
 
-const Media   = require('./Media');
-const Episode = require('./Episode');
+const NAME = 'Series';
 
-module.exports = bookshelf.Model.extend({
-	tableName: 'Series',
+module.exports = bookshelf.model(NAME, {
+	tableName: NAME,
 	media: function() {
-		return this.hasOne(Media, 'id', 'media_id');
+		return this.hasOne('Media', 'id', 'media_id');
 	},
 	episodes: function() {
-		return this.hasMany(Episode, 'series_id', 'id');
+		return this.hasMany('Episode', 'series_id', 'id');
 	}
 });
 
