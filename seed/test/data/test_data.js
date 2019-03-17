@@ -3,6 +3,8 @@ const Info = gen.Info;
 const Media = gen.Media;
 const Series = gen.Series;
 const Episode = gen.Episode;
+const File = gen.File;
+
 
 const mediaInfo1 = new Info()
 	.withImdb('testimdb1')
@@ -18,7 +20,9 @@ const media1 = new Media()
 		.withImdb()
 		.withScore(5.7, 1.2)
 		.withPlot('Short description of media 1', 'Blah blah blah')
-	);
+	)
+	.withFile(new File())
+	.withFile(new File());
 
 const series1 = new Series()
 	.withEndDate('')
@@ -63,6 +67,9 @@ module.exports = {
 	],
 	episode: [
 		...series1.episodes
+	],
+	file: [
+		...media1.files
 	]
 };
 

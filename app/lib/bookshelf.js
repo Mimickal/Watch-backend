@@ -6,6 +6,7 @@ knex.raw('PRAGMA foreign_keys = ON;')
 
 const Bookshelf = require('bookshelf')(knex);
 
+Bookshelf.plugin('registry');
 Bookshelf.plugin('pagination');
 
 module.exports = Bookshelf;

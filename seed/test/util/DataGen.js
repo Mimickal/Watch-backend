@@ -45,6 +45,8 @@ exports.Media = class {
 		this.title_normalized = 'Test title ' + this.id;
 		this.date_added = '';
 		this.runtime = null;
+		this.info_id = null;
+		this.files = [];
 	}
 	withTitle(title, normalized) {
 		this.title = title;
@@ -66,6 +68,11 @@ exports.Media = class {
 	withInfo(info) {
 		this.info_id = info.id;
 		this.info = info;
+		return this;
+	}
+	withFile(file) {
+		file.media_id = this.id;
+		this.files.push(file);
 		return this;
 	}
 	model() {
@@ -133,6 +140,44 @@ exports.Episode = class {
 			series_id: this.series_id,
 			episode: this.episode,
 			season: this.season
+		};
+	}
+}
+
+exports.File = class {
+	constructor(id) {
+		this.id = id || util.nextId('file');
+		this.file_id = util.randInt(50000);
+		this.path = util.randString();
+		this.size_bytes = util.randInt(99999999);
+		this.hash_md5 = util.randHash();
+		this.verified = false;
+	}
+	withPath(path) {
+		this.path = path;
+		return this;
+	}
+	withHash(hash) {
+		this.hash_md5 = hash;
+		return this;
+	}
+	withSize(size) {
+		this.size_bytes = size;
+		return this;
+	}
+	withVerified() {
+		this.verified = true;
+		return this;
+	}
+	model() {
+		return {
+			id: this.id,
+			media_id: this.media_id,
+			file_id: this.file_id,
+			path: this.path,
+			size_bytes: this.size_bytes,
+			hash_md5: this.hash_md5,
+			verified: this.verified
 		};
 	}
 }
