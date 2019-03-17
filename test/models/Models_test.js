@@ -95,6 +95,17 @@ describe('Models', function() {
 			let gotEpisode = gotModel.toJSON();
 			expect(gotEpisode.media).to.deep.equal(episode.media.model());
 		});
+
+		it('Fetching associated Series', async function() {
+			let series = testdata.series1;
+
+			let gotModel = await Episode
+				.where({id: series.episodes[0].id})
+				.fetch({withRelated: 'series'});
+
+			let gotEpisode = gotModel.toJSON();
+			expect(gotEpisode.series).to.deep.equal(series.model());
+		});
 	});
 
 	describe('File', function() {
@@ -102,7 +113,6 @@ describe('Models', function() {
 			let gotModel = await File
 				.where({id: testdata.media1.files[0].id})
 				.fetch({withRelated: 'media'});
-	console.log("Hello");
 
 			let gotFile = gotModel.toJSON();
 			expect(gotFile.media).to.deep.equal(testdata.media1.model());
