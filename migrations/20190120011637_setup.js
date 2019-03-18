@@ -38,7 +38,7 @@ exports.up = function(knex, Promise) {
 			table.string('path', 4096).notNullable();
 			table.bigInteger('size_bytes').notNullable();
 			table.string('hash_md5', 32).notNullable();
-			table.boolean('verified').notNullable().defaultTo(false);
+			table.boolean('verified').defaultTo(false);
 		})
 		.createTable('Issue', table => {
 			table.increments('id').primary();

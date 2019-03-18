@@ -1,4 +1,6 @@
-const expect = require('chai').expect;
+const expect = require('chai')
+	.use(require('chai-as-promised'))
+	.expect;
 
 const knex = require('../../app/lib/bookshelf').knex;
 const testdata = require('../../seed/test/data/test_data');
@@ -118,9 +120,27 @@ describe('Models', function() {
 			expect(gotFile.media).to.deep.equal(testdata.media1.model());
 		});
 
-		it('Path size limited to 4096');
+		it('Path length limited to 4096', async function() {
+			let testFile = Object.assign({}, testdata.media1.files[0]);
+			delete testFile.id;
+			testFile.path = 'x'.repeat(4096);
 
-		it('Verified defaults to false');
+			expect(File.forge(testFile).save()).to.be.fulfilled;
+
+			testFile.path += 'x';
+
+			return expect(File.forge(testFile).save())
+				.to.be.rejectedWith(Error, 'File path longer than 4096 chars');
+		});
+
+		it('Verified defaults to false', async function() {
+			let testFile = Object.assign({}, testdata.media1.files[0]);
+			delete testFile.verified;
+
+			let addedFile = await File.forge(testFile).save();
+
+			expect(addedFile.attributes.verified).to.equal(false);
+		});
 	});
 });
 
