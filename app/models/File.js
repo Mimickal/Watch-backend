@@ -1,6 +1,7 @@
 const bookshelf = require('../lib/bookshelf');
 
 const NAME = 'File';
+const MD5_HASH_LENGTH = 32;
 const MAX_PATH_LENGTH = 4096;
 
 module.exports = bookshelf.model(NAME, {
@@ -15,6 +16,10 @@ module.exports = bookshelf.model(NAME, {
 
 			if (model.get('path').length > MAX_PATH_LENGTH) {
 				throw new Error(`File path longer than ${MAX_PATH_LENGTH} chars`);
+			}
+
+			if (model.get('hash_md5').length != MD5_HASH_LENGTH) {
+				throw new Error(`hash_md5 must have length ${MD5_HASH_LENGTH}`);
 			}
 		});
 

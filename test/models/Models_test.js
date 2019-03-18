@@ -120,6 +120,18 @@ describe('Models', function() {
 			expect(gotFile.media).to.deep.equal(testdata.media1.model());
 		});
 
+		it('MD5 hash length must be 32', async function() {
+			let testFile = Object.assign({}, testdata.media1.files[0]);
+			delete testFile.id;
+
+			expect(File.forge(testFile).save()).to.be.fulfilled;
+
+			testFile.hash_md5 += 'x';
+
+			expect(File.forge(testFile).save())
+				.to.be.rejectedWith(Error, 'hash_md5 must have length 32');
+		});
+
 		it('Path length limited to 4096', async function() {
 			let testFile = Object.assign({}, testdata.media1.files[0]);
 			delete testFile.id;
@@ -129,7 +141,7 @@ describe('Models', function() {
 
 			testFile.path += 'x';
 
-			return expect(File.forge(testFile).save())
+			expect(File.forge(testFile).save())
 				.to.be.rejectedWith(Error, 'File path longer than 4096 chars');
 		});
 
