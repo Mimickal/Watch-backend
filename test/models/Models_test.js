@@ -30,6 +30,51 @@ describe('Models', function() {
 			let gotInfo = gotModel.toJSON();
 			expect(gotInfo).to.deep.equal(testdata.mediaInfo1);
 		});
+
+		it('imdb_id must have length of 9', async function() {
+			let expectedError = 'imdb_id must have length 9';
+			let mediaInfo = Object.assign({}, testdata.mediaInfo1);
+			delete mediaInfo.id;
+
+			mediaInfo.imdb_id = 'x'.repeat(8);
+			expect(MediaInfo.forge(mediaInfo).save())
+				.to.be.rejectedWith(Error, expectedError);
+
+			mediaInfo.imdb_id = 'x'.repeat(10);
+			expect(MediaInfo.forge(mediaInfo).save())
+				.to.be.rejectedWith(Error, expectedError);
+		});
+
+		function scoreTest(field) {
+			return async function() {
+				const model = function(value) {
+					let obj = Object.assign({}, testdata.mediaInfo1);
+					delete obj.id;
+					obj.imdb_id = Math.random().toString(36).substring(2, 11);
+					obj[field] = value;
+					return obj;
+				}
+
+				const errMsg = function(value) {
+					return `${field} must be a number between 0 and 10 `
+						+ `(Got: ${value})`;
+				}
+
+				expect(MediaInfo.forge(model(-0.1)).save())
+					.to.be.rejectedWith(Error, errMsg(-0.1));
+
+				expect(MediaInfo.forge(model(10.1)).save())
+					.to.be.rejectedWith(Error, errMsg(10.1));
+
+				expect(MediaInfo.forge(model(0)).save()).to.be.fulfilled;
+
+				expect(MediaInfo.forge(model(10)).save()).to.be.fulfilled;
+			}
+		}
+
+		it('score_imdb must be between 0 and 10', scoreTest('score_imdb'));
+
+		it('score_meta must be between 0 and 10', scoreTest('score_meta'));
 	});
 
 	describe('Media', function() {
