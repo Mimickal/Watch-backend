@@ -165,8 +165,8 @@ exports.File = class {
 		this.size_bytes = size;
 		return this;
 	}
-	withVerified() {
-		this.verified = true;
+	withVerified(val) {
+		this.verified = val;
 		return this;
 	}
 	model() {

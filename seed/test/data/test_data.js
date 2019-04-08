@@ -25,7 +25,7 @@ const media1 = new Media()
 	.withFile(new File());
 
 const series1 = new Series()
-	.withEndDate('')
+	.withEndDate(Date.now())
 	.withMedia(new Media()
 		.withTitle('Media for Series 1')
 		.withType(2)

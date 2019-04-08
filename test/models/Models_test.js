@@ -26,7 +26,7 @@ describe('Models', function() {
 			let gotModel = await MediaInfo
 				.where({id: testdata.mediaInfo1.id})
 				.fetch();
-			// TODO validate date
+
 			let gotInfo = gotModel.toJSON();
 			expect(gotInfo).to.deep.equal(testdata.mediaInfo1);
 		});
@@ -78,7 +78,6 @@ describe('Models', function() {
 	});
 
 	describe('Media', function() {
-		// TODO add test validating date
 		it('Fetching associated MediaInfo', async function() {
 			let gotMedia = await Media
 				.where({id: testdata.media1.id})
@@ -96,6 +95,15 @@ describe('Models', function() {
 			let gotMedia = gotModel.toJSON();
 			expect(gotMedia.files).to.deep.equal(testdata.media1.files);
 		});
+
+		it('date_added defaults to now', async function() {
+			let testMedia = Object.assign({}, testdata.media1.model());
+			testMedia.date_added = null;
+
+			let addedMedia = await Media.forge(testMedia).save();
+
+			expect(addedMedia.attributes.date_added).to.be.closeTo(Date.now(), 60);
+		});
 	});
 
 	describe('Series', function() {
@@ -104,7 +112,6 @@ describe('Models', function() {
 				.where({id: testdata.series1.id})
 				.fetch();
 
-			// TODO validate date
 			let gotSeries = gotModel.toJSON();
 			expect(gotSeries).to.deep.equal(testdata.series1.model());
 		});
@@ -128,6 +135,7 @@ describe('Models', function() {
 			expect(gotSeries.episodes).to.deep.equal(episodes);
 		});
 
+		// TODO implement this test
 		it.skip('Fetch associated Episodes for season');
 	});
 
