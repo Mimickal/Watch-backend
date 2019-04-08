@@ -11,7 +11,7 @@ module.exports = {
 		},
 		useNullAsDefault: true,
 		seeds: {
-			directory: ''
+			directory: 'seed/'
 		}
 	},
 
@@ -22,7 +22,7 @@ module.exports = {
 		},
 		useNullAsDefault: true,
 		seeds: {
-			directory: ''
+			directory: 'seed/test/'
 		}
 	}
 

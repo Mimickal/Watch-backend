@@ -3,11 +3,11 @@ exports.up = function(knex, Promise) {
 	return knex.schema
 		.createTable('MediaInfo', table => {
 			table.increments('id').primary();
-			table.string('imdb_id', 9).unique();
-			table.decimal('score_imdb', 2, 1).unsigned();
-			table.decimal('score_meta', 2, 1).unsigned();
-			table.date('date_release');
-			table.string('plot_short', 200);
+			table.string('imdb_id', 9).unique().nullable();
+			table.decimal('score_imdb', 2, 1).unsigned().nullable();
+			table.decimal('score_meta', 2, 1).unsigned().nullable();
+			table.date('date_release').nullable();
+			table.string('plot_short', 200).nullable();
 			table.string('plot_full', 1000).nullable();
 		})
 		.createTable('Media', table => {
@@ -17,7 +17,7 @@ exports.up = function(knex, Promise) {
 			table.string('title').notNullable();
 			table.string('title_normalized').notNullable();
 			table.date('date_added').defaultTo(knex.fn.now()).notNullable();
-			table.integer('runtime').notNullable();
+			table.integer('runtime').nullable();
 		})
 		.createTable('Series', table => {
 			table.increments('id').primary();
@@ -38,7 +38,7 @@ exports.up = function(knex, Promise) {
 			table.string('path', 4096).notNullable();
 			table.bigInteger('size_bytes').notNullable();
 			table.string('hash_md5', 32).notNullable();
-			table.boolean('verified').defaultTo(false).notNullable();
+			table.boolean('verified').defaultTo(false);
 		})
 		.createTable('Issue', table => {
 			table.increments('id').primary();
