@@ -6,7 +6,7 @@ const FluentRes = require('./fluent_res');
 const PORT = 3000;
 
 const app = polka();
-const media = require('./controllers/media')(app);
+require('./controllers/media')(app);
 
 app.use((req, res, next) => {
 	// Log requested routes
@@ -24,4 +24,6 @@ app.listen(PORT, err => {
 	if (err) throw err;
 	console.log(`FunboxWatch2 backend listening on port ${PORT}`);
 });
+
+module.exports = app;
 
