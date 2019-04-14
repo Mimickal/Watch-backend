@@ -2,8 +2,8 @@
   "name": "funbox-watch-backend",
   "version": "1.0.0",
   "description": "Funbox watch backend",
-  "main": "main.js",
   "scripts": {
+    "start": "node ./app",
     "test": "NODE_ENV=test mocha --recursive --exit",
     "migrate": "knex migrate:latest"
   },
@@ -12,6 +12,7 @@
   "dependencies": {
     "bookshelf": "^0.14.2",
     "knex": "^0.14.6",
+    "polka": "^0.5.2",
     "sqlite3": "^4.0.6"
   },
   "devDependencies": {
