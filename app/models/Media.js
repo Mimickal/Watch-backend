@@ -16,6 +16,9 @@ module.exports = bookshelf.model(NAME, {
 	info: function() {
 		return this.hasOne('MediaInfo', 'id', 'info_id');
 	},
+	series: function() {
+		return this.hasOne('Series', 'media_id', 'id');
+	},
 	files: function() {
 		return this.hasMany('File', 'media_id', 'id');
 	}

@@ -104,6 +104,16 @@ describe('Models', function() {
 
 			expect(addedMedia.attributes.date_added).to.be.closeTo(Date.now(), 60);
 		});
+
+		it('Fetching associated Series', async function() {
+			let testSeries = testdata.series1;
+			let gotMedia = await Media
+				.where({id: testSeries.media.id})
+				.fetch({withRelated: 'series'});
+
+			let gotSeries = gotMedia.toJSON().series;
+			expect(gotSeries).to.deep.equal(testSeries.model());
+		});
 	});
 
 	describe('Series', function() {
