@@ -1,5 +1,6 @@
 const expect = require('chai')
 	.use(require('chai-as-promised'))
+	.use(require('chai-subset'))
 	.expect;
 
 const knex = require('../../app/lib/bookshelf').knex;
@@ -113,6 +114,17 @@ describe('Models', function() {
 
 			let gotSeries = gotMedia.toJSON().series;
 			expect(gotSeries).to.deep.equal(testSeries.model());
+		});
+
+		describe('search', function() {
+			describe('by', function() {
+				it('title', async function() {
+					let results = await Media.search('title_normalized', '3');
+					expect(results).to.containSubset([
+						testdata.media3.model(), testdata.media4.model()
+					]);
+				});
+			});
 		});
 	});
 
