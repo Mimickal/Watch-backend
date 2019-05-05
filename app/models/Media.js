@@ -48,6 +48,17 @@ module.exports = bookshelf.model(NAME, {
 				.whereBetween('date_release',  [search.from, search.to])
 			);
 		}
+		/* TODO support searching by multiple fields? it's weird that 'plot'
+		 * searches by two fields (and isn't a field itself)*/
+		else if (args.field === 'plot') {
+			let like = `%${args.search}%`;
+			query = this.whereIn('info_id', q => q
+				.select('id')
+				.from('MediaInfo')
+				.where('plot_short','LIKE', like)
+				.orWhere('plot_full', 'LIKE', like)
+			);
+		}
 		else {
 			throw Error(`Invalid search field [${args.field}]`);
 		}

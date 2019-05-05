@@ -163,6 +163,18 @@ describe('Models', function() {
 						);
 					});
 				});
+
+				it('plot', async function() {
+					let results = await Media.search({
+						field: 'plot',
+						search: 'Aqua Teen'
+					});
+					expect(results).to.have.lengthOf(2);
+					expect(results).to.containSubset([
+						testdata.series3.media.model(),
+						testdata.series3.episodes[0].media.model()
+					]);
+				});
 			});
 
 			it('Invalid field', async function() {
