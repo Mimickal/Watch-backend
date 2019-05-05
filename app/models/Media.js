@@ -29,19 +29,23 @@ module.exports = bookshelf.model(NAME, {
 	}
 }, {
 	search: async function(args) {
+		if (!args.search) {
+			throw Error('Missing search parameter');
+		}
+
 		let query;
 		if (args.field === 'title_normalized') {
-			// TODO validate search
 			query = this.whereLike(args.field, `%${args.search}%`);
 		}
 		else if (args.field === 'date_release') {
-			if (!args.from || !args.to) {
+			let search = args.search;
+			if (!search.from || !search.to) {
 				throw Error('from and to must be defined');
 			}
 			query = this.whereIn('info_id', q => q
 				.select('id')
 				.from('MediaInfo')
-				.whereBetween('date_release',  [args.from, args.to])
+				.whereBetween('date_release',  [search.from, search.to])
 			);
 		}
 		else {

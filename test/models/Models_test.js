@@ -133,8 +133,10 @@ describe('Models', function() {
 					it('valid search', async function() {
 						let results = await Media.search({
 							field: 'date_release',
-							from: new Date('2009-01-01').getTime(),
-							to: new Date('2009-12-31').getTime()
+							search: {
+								from: new Date('2009-01-01').getTime(),
+								to: new Date('2009-12-31').getTime()
+							}
 						});
 						expect(results).to.have.lengthOf(2);
 						expect(results).to.containSubset([
@@ -146,7 +148,7 @@ describe('Models', function() {
 					it('Missing to', function() {
 						return expect(Media.search({
 							field: 'date_release',
-							from: new Date()
+							search: { from: new Date() }
 						})).to.be.rejectedWith(
 							Error, 'from and to must be defined'
 						);
@@ -155,7 +157,7 @@ describe('Models', function() {
 					it('Missing from', function() {
 						return expect(Media.search({
 							field: 'date_release',
-							to: new Date()
+							search: { to: new Date() }
 						})).to.be.rejectedWith(
 							Error, 'from and to must be defined'
 						);
@@ -165,9 +167,16 @@ describe('Models', function() {
 
 			it('Invalid field', async function() {
 				let badField = 'bad_field';
-				return expect(
-					Media.search({ field: badField })
-				).to.be.rejectedWith(Error, `Invalid search field [${badField}]`);
+				return expect(Media.search({
+					field: badField,
+					search: 'ignore'
+				})).to.be.rejectedWith(Error, `Invalid search field [${badField}]`);
+			});
+
+			it('Missing search', async function() {
+				return expect(Media.search({
+					field: 'title_normalized'
+				})).to.be.rejectedWith(Error, 'Missing search parameter');
 			});
 		});
 	});
