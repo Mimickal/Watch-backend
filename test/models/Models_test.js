@@ -119,11 +119,55 @@ describe('Models', function() {
 		describe('search', function() {
 			describe('by', function() {
 				it('title', async function() {
-					let results = await Media.search('title_normalized', '3');
+					let results = await Media.search({
+						field: 'title_normalized',
+						search: '3'
+					});
+					expect(results).to.have.lengthOf(2);
 					expect(results).to.containSubset([
 						testdata.media3.model(), testdata.media4.model()
 					]);
 				});
+
+				describe('year', function() {
+					it('valid search', async function() {
+						let results = await Media.search({
+							field: 'date_release',
+							from: new Date('2009-01-01').getTime(),
+							to: new Date('2009-12-31').getTime()
+						});
+						expect(results).to.have.lengthOf(2);
+						expect(results).to.containSubset([
+							testdata.media1.model(),
+							testdata.media2.model()
+						]);
+					});
+
+					it('Missing to', function() {
+						return expect(Media.search({
+							field: 'date_release',
+							from: new Date()
+						})).to.be.rejectedWith(
+							Error, 'from and to must be defined'
+						);
+					});
+
+					it('Missing from', function() {
+						return expect(Media.search({
+							field: 'date_release',
+							to: new Date()
+						})).to.be.rejectedWith(
+							Error, 'from and to must be defined'
+						);
+					});
+				});
+			});
+
+			it('Invalid field', async function() {
+				let badField = 'bad_field';
+				return expect(
+					Media.search({ field: badField })
+				).to.be.rejectedWith(Error, `Invalid search field [${badField}]`);
 			});
 		});
 	});

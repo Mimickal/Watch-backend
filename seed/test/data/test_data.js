@@ -19,6 +19,7 @@ const media1 = new Media()
 	.withInfo(new Info()
 		.withImdb()
 		.withScore(5.7, 1.2)
+		.withReleaseDate(new Date('2009-01-01'))
 		.withPlot('Short description of media 1', 'Blah blah blah')
 	)
 	.withFile(new File())
@@ -28,11 +29,11 @@ const media2 = new Media()
 	.withTitle('Brüno', 'Bruno')
 	.withType(1)
 	.withRuntime(81)
-	.withAddDate(new Date(2018, 1, 1))
+	.withAddDate(new Date('2018-01-01'))
 	.withInfo(new Info()
 		.withImdb('tt0889583')
 		.withScore(5.8, 5.4)
-		.withReleaseDate(new Date(2009, 7, 10))
+		.withReleaseDate(new Date('2009-07-10'))
 		.withPlot(
 			'Flamboyant and gay Austrian Brüno looks for new fame in America.',
 			`Brüno is a gay Austrian fashion guru. He has his own fashion based
@@ -45,11 +46,11 @@ const media3 = new Media()
 	.withTitle('3:10 to Yuma', '3 10 to Yuma')
 	.withType(1)
 	.withRuntime(122)
-	.withAddDate(new Date(2019, 2, 1))
+	.withAddDate(new Date('2019-02-01'))
 	.withInfo(new Info()
 		.withImdb('tt0381849')
 		.withScore(7.7, null)
-		.withReleaseDate(new Date(2007, 9, 7))
+		.withReleaseDate(new Date('2007-09-07'))
 		.withPlot(`A small-time rancher agrees to hold a captured outlaw who's
 			awaiting a train to go to court in Yuma. A battle of wills ensues as
 			the outlaw tries to psych out the rancher.`
@@ -60,11 +61,11 @@ const media4 = new Media()
 	.withTitle('300', '300')
 	.withType(1)
 	.withRuntime(117)
-	.withAddDate(new Date(2018, 3, 1))
+	.withAddDate(new Date('2018-03-01'))
 	.withInfo(new Info()
 		.withImdb('tt0416449')
 		.withScore(7.7, null)
-		.withReleaseDate(new Date(2007, 3, 9))
+		.withReleaseDate(new Date('2007-03-09'))
 		.withPlot(`King Leonidas of Sparta and a force of 300 men fight the
 			Persians at Thermopylae in 480 B.C.`
 		)
@@ -93,16 +94,16 @@ const series1 = new Series()
 	);
 
 const series2 = new Series()
-	.withEndDate(new Date(2015, 6, 14))
+	.withEndDate(new Date('2015-06-14'))
 	.withMedia(new Media()
 		.withTitle('China, IL', 'China IL')
 		.withType(2)
 		.withRuntime(22)
-		.withAddDate(new Date(2018, 4, 1))
+		.withAddDate(new Date('2018-04-01'))
 		.withInfo(new Info()
 			.withImdb('tt2058221')
 			.withScore(6.6, null)
-			.withReleaseDate(new Date(2018, 5, 25))
+			.withReleaseDate(new Date('2008-10-02'))
 			.withPlot(`Steve and Frank Smith are brothers who teach the history
 				department in the worst university in America.`
 			)
@@ -110,15 +111,15 @@ const series2 = new Series()
 	);
 
 const series3 = new Series()
-	.withEndDate(new Date(2015, 8, 26))
+	.withEndDate(new Date('2015-08-26'))
 	.withMedia(new Media()
 		.withTitle('Aqua Teen Hunger Force', 'Aqua Teen Hunger Force')
 		.withType(2)
 		.withRuntime(15)
-		.withAddDate(new Date(2019, 5, 1))
+		.withAddDate(new Date('2019-05-01'))
 		.withInfo(new Info()
 			.withImdb('tt0297494')
-			.withReleaseDate(new Date(2000, 12, 30))
+			.withReleaseDate(new Date('2000-12-30'))
 			.withPlot(`The misadventures of a milkshake, an order of fries, a
 				meatball, and their retired next door neighbor in the suburbs of
 				New Jersey.`,
@@ -136,10 +137,11 @@ const series3 = new Series()
 			.withTitle('Rabbot', 'Rabbot')
 			.withType(3)
 			.withRuntime(12)
-			.withAddDate(new Date(2019, 5, 1))
+			.withAddDate(new Date('2019-05-01'))
 			.withInfo(new Info()
 				.withImdb('tt0821172')
 				.withScore(7.4, null)
+				.withReleaseDate(new Date('2000-12-30'))
 				.withPlot(`Dr. Weird invents a robot rabbit that escapes and
 					destroys Carls car. So now it's up to Aqua Teen Hunger Force
 					to find out who did it.`
@@ -153,10 +155,11 @@ const series3 = new Series()
 			.withTitle('Bus of the Undead', 'Bus of the Undead')
 			.withType(3)
 			.withRuntime(12)
-			.withAddDate(new Date(2019, 6, 1))
+			.withAddDate(new Date('2019-06-01'))
 			.withInfo(new Info()
 				.withImdb('tt0514061')
 				.withScore(8.3, null)
+				.withReleaseDate(new Date('2001-09-30'))
 				.withPlot(`Dr. Weird creates a mutant creature named
 					MothMonsterMan. The creature escapes and flies to the Aqua
 					Teens' house, attracted by the light.`
@@ -170,10 +173,11 @@ const series3 = new Series()
 			.withTitle('Super Birthday Snake', 'Super Birthday Snake')
 			.withType(3)
 			.withRuntime(12)
-			.withAddDate(new Date(2019, 7, 1))
+			.withAddDate(new Date('2019-07-01'))
 			.withInfo(new Info()
 				.withImdb('tt0763336')
 				.withScore(8.3, null)
+				.withReleaseDate(new Date('2003-05-23'))
 				.withPlot(`Meatwad is expecting the arrival of his new pet, a
 					bunny. A snake arrives instead, and Master Shake is
 					suspiciously unsurprised.`
@@ -187,10 +191,11 @@ const series3 = new Series()
 			.withTitle('Super Hero', 'Super Hero')
 			.withType(3)
 			.withRuntime(12)
-			.withAddDate(new Date(2019, 6, 1))
+			.withAddDate(new Date('2019-06-01'))
 			.withInfo(new Info()
 				.withImdb('tt0763337')
 				.withScore(8.1, null)
+				.withReleaseDate(new Date('2003-06-01'))
 				.withPlot(`Master Shake wants to become a super hero so he
 					steels three drums of highly toxic chemical waste and starts
 					to mutate.`
@@ -204,10 +209,11 @@ const series3 = new Series()
 			.withTitle('Super Bowl', 'Super Bowl')
 			.withType(3)
 			.withRuntime(12)
-			.withAddDate(new Date(2019, 2, 1))
+			.withAddDate(new Date('2019-02-01'))
 			.withInfo(new Info()
 				.withImdb('tt0815765')
 				.withScore(8.3, null)
+				.withReleaseDate(new Date('2003-06-08'))
 				.withPlot(`Meatwad wins two tickets two Super Bowl and both
 					Shake and Carl wants to go with him so they do whatever
 					Meatwad whats so he will choose them.`

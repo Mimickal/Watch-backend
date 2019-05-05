@@ -28,15 +28,27 @@ module.exports = bookshelf.model(NAME, {
 		return this.hasMany('File', 'media_id', 'id');
 	}
 }, {
-	search: async function(field, search) {
-		let results = await this
-			.query(qb => {
-				if (field === 'title_normalized') {
-					qb.where(field, 'LIKE', `%${search}%`);
-				}
-			})
-			.fetchAll({withRelated: ['info', 'series']});
+	search: async function(args) {
+		let query;
+		if (args.field === 'title_normalized') {
+			// TODO validate search
+			query = this.whereLike(args.field, `%${args.search}%`);
+		}
+		else if (args.field === 'date_release') {
+			if (!args.from || !args.to) {
+				throw Error('from and to must be defined');
+			}
+			query = this.whereIn('info_id', q => q
+				.select('id')
+				.from('MediaInfo')
+				.whereBetween('date_release',  [args.from, args.to])
+			);
+		}
+		else {
+			throw Error(`Invalid search field [${args.field}]`);
+		}
 
+		let results = await query.fetchAll({withRelated: ['info', 'series']});
 		return results.map(flatten);
 	}
 });
@@ -68,3 +80,4 @@ function flatten(model) {
 	delete json.series;
 	return json;
 }
+

@@ -33,10 +33,20 @@ module.exports = bookshelf.model(NAME, {
 
 			// TODO maybe validate plot_short and plot_full?
 		});
+
+		this.on('fetched', convertDates);
+		this.on('fetched::collection', coll => coll.forEach(convertDates));
 	}
 });
 
 function invalidScoreError(name, value) {
 	return new Error(`${name} ${INVALID_SCORE_MESSAGE} (Got: ${value})`);
+}
+
+function convertDates(model) {
+	let dateRelease = model.get('date_release');
+	if (dateRelease) {
+		model.set('date_release', new Date(dateRelease));
+	}
 }
 
