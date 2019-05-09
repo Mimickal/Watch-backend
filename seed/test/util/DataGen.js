@@ -16,7 +16,7 @@ exports.Info = class {
 	}
 	withPlot(shortPlot, longPlot) {
 		this.plot_short = shortPlot;
-		this.plot_full = longPlot;
+		this.plot_full = longPlot || null;
 		return this;
 	}
 	// If null, knex will auto-fill with "now"

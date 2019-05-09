@@ -6,12 +6,18 @@
  */
 module.exports = function(res) {
 	res.status = status.bind(res);
+	res.text = text.bind(res);
 	res.json = json.bind(res);
 };
 
 function status(code) {
 	this.statusCode = code;
 	return this;
+}
+
+function text(text) {
+	this.setHeader('Content-Type', 'text/plain');
+	this.end(text);
 }
 
 function json(data) {
