@@ -93,6 +93,7 @@ function flatten(model) {
 	let json = model.toJSON();
 	delete json.info;
 	delete json.series;
+	delete json.info_id;
 	return json;
 }
 

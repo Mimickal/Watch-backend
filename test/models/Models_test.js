@@ -5,6 +5,7 @@ const expect = require('chai')
 
 const knex = require('../../app/lib/bookshelf').knex;
 const testdata = require('../../seed/test/data/test_data');
+const util = require('../util');
 
 const MediaInfo = require('../../app/models/MediaInfo');
 const Media = require('../../app/models/Media');
@@ -125,7 +126,8 @@ describe('Models', function() {
 					});
 					expect(results).to.have.lengthOf(2);
 					expect(results).to.containSubset([
-						testdata.media3.model(), testdata.media4.model()
+						util.flattenMedia(testdata.media3),
+						util.flattenMedia(testdata.media4)
 					]);
 				});
 
@@ -140,8 +142,8 @@ describe('Models', function() {
 						});
 						expect(results).to.have.lengthOf(2);
 						expect(results).to.containSubset([
-							testdata.media1.model(),
-							testdata.media2.model()
+							util.flattenMedia(testdata.media1),
+							util.flattenMedia(testdata.media2)
 						]);
 					});
 
@@ -171,8 +173,8 @@ describe('Models', function() {
 					});
 					expect(results).to.have.lengthOf(2);
 					expect(results).to.containSubset([
-						testdata.series3.media.model(),
-						testdata.series3.episodes[0].media.model()
+						util.flattenMedia(testdata.series3.media),
+						util.flattenMedia(testdata.series3.episodes[0].media)
 					]);
 				});
 			});

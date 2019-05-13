@@ -4,6 +4,8 @@ exports.Info = class {
 	constructor(id) {
 		this.id = id || util.nextId('info');
 		this.date_release = '';
+		this.score_imdb = null;
+		this.score_meta = null;
 	}
 	withImdb(imdbId) {
 		this.imdb_id = imdbId || 'imdbid' + String(this.id).padStart(3, '0');

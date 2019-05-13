@@ -58,6 +58,17 @@ describe('media controller', function() {
 				]);
 			});
 
+			it('year', async function() {
+				let res = await chai.request(app)
+					.get('/media/search/2000?by=year');
+
+				expect(res.status).to.equal(200);
+				expect(util.convertDates(res.body)).to.deep.equal([
+					util.flattenSeries(testdata.series3),
+					util.flattenMedia(testdata.series3.episodes[0].media)
+				]);
+			});
+
 		});
 
 	});

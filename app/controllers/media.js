@@ -44,12 +44,23 @@ app.get('/media/search/:search', async (req, res) => {
 		return res.status(400).text(`Invalid 'by' field [${by}]`);
 	}
 
-	// Convert 'by' to Media field to query on
-	by = BY_QUERY_MAP[by] || by;
+	let search = req.params.search;
+
+	if (by === 'year') {
+		let year = Number.parseInt(search);
+		if (!Number.isInteger(year)) {
+			return res.status(400).text(`Invalid year [${search}]`);
+		}
+
+		search = {
+			from: new Date(`${year}-01-01`),
+			to: new Date(`${year}-12-31`)
+		};
+	}
 
 	let media = await Media.search({
-		search: req.params.search,
-		field: by
+		search: search,
+		field: BY_QUERY_MAP[by] || by // Convert 'by' to Media field to query on
 	});
 
 	res.status(200).json(media);
