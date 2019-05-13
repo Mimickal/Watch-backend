@@ -44,7 +44,7 @@ app.get('/media/search/:search', async (req, res) => {
 		return res.status(400).text(`Invalid 'by' field [${by}]`);
 	}
 
-	let search = req.params.search;
+	let search = decodeURI(req.params.search);
 
 	if (by === 'year') {
 		let year = Number.parseInt(search);

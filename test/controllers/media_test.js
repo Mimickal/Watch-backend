@@ -69,6 +69,16 @@ describe('media controller', function() {
 				]);
 			});
 
+			it('plot', async function() {
+				let res = await chai.request(app)
+					.get('/media/search/aqua teen?by=plot');
+
+				expect(res.status).to.equal(200);
+				expect(util.convertDates(res.body)).to.deep.equal([
+					util.flattenSeries(testdata.series3),
+					util.flattenMedia(testdata.series3.episodes[0].media)
+				]);
+			});
 		});
 
 	});
