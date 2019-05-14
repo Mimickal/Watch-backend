@@ -65,7 +65,7 @@ describe('media controller', function() {
 				expect(res.status).to.equal(200);
 				expect(util.convertDates(res.body)).to.deep.equal([
 					util.flattenSeries(testdata.series3),
-					util.flattenMedia(testdata.series3.episodes[0].media)
+					util.flattenMedia(testdata.s3e1.media)
 				]);
 			});
 
@@ -76,7 +76,7 @@ describe('media controller', function() {
 				expect(res.status).to.equal(200);
 				expect(util.convertDates(res.body)).to.deep.equal([
 					util.flattenSeries(testdata.series3),
-					util.flattenMedia(testdata.series3.episodes[0].media)
+					util.flattenMedia(testdata.s3e1.media)
 				]);
 			});
 		});

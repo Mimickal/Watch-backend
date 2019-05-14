@@ -110,6 +110,15 @@ const series2 = new Series()
 		)
 	);
 
+// FIXME These can be declared separately, but all fields need to be set within
+// the fluent interface below, for some reason.
+// I probably messed up the data generator. Sue me.
+const s3e1 = new Episode();
+const s3e2 = new Episode();
+const s3e3 = new Episode();
+const s3e4 = new Episode();
+const s3e5 = new Episode();
+
 const series3 = new Series()
 	.withEndDate(new Date('2015-08-26'))
 	.withMedia(new Media()
@@ -131,7 +140,7 @@ const series3 = new Series()
 			)
 		)
 	)
-	.withEpisode(new Episode()
+	.withEpisode(s3e1
 		.withNumber(1, 1)
 		.withMedia(new Media()
 			.withTitle('Rabbot', 'Rabbot')
@@ -149,7 +158,7 @@ const series3 = new Series()
 			)
 		)
 	)
-	.withEpisode(new Episode()
+	.withEpisode(s3e2
 		.withNumber(1, 3)
 		.withMedia(new Media()
 			.withTitle('Bus of the Undead', 'Bus of the Undead')
@@ -167,7 +176,7 @@ const series3 = new Series()
 			)
 		)
 	)
-	.withEpisode(new Episode()
+	.withEpisode(s3e3
 		.withNumber(2, 1)
 		.withMedia(new Media()
 			.withTitle('Super Birthday Snake', 'Super Birthday Snake')
@@ -185,7 +194,7 @@ const series3 = new Series()
 			)
 		)
 	)
-	.withEpisode(new Episode()
+	.withEpisode(s3e4
 		.withNumber(2, 2)
 		.withMedia(new Media()
 			.withTitle('Super Hero', 'Super Hero')
@@ -203,7 +212,7 @@ const series3 = new Series()
 			)
 		)
 	)
-	.withEpisode(new Episode()
+	.withEpisode(s3e5
 		.withNumber(2, 3)
 		.withMedia(new Media()
 			.withTitle('Super Bowl', 'Super Bowl')
@@ -232,6 +241,11 @@ module.exports = {
 	series1: series1,
 	series2: series2,
 	series3: series3,
+	s3e1: s3e1,
+	s3e2: s3e2,
+	s3e3: s3e3,
+	s3e4: s3e4,
+	s3e5: s3e5,
 
 	mediaInfo: [
 		mediaInfo1,

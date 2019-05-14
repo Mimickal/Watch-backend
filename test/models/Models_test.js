@@ -24,7 +24,7 @@ describe('Models', function() {
 	});
 
 	describe('MediaInfo', function() {
-		it('Fetching MedaiInfo record', async function() {
+		it('Fetching MediaInfo record', async function() {
 			let gotModel = await MediaInfo
 				.where({id: testdata.mediaInfo1.id})
 				.fetch();
@@ -174,7 +174,7 @@ describe('Models', function() {
 					expect(results).to.have.lengthOf(2);
 					expect(results).to.containSubset([
 						util.flattenMedia(testdata.series3.media),
-						util.flattenMedia(testdata.series3.episodes[0].media)
+						util.flattenMedia(testdata.s3e1.media)
 					]);
 				});
 			});
