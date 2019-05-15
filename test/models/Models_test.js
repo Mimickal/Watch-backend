@@ -179,6 +179,45 @@ describe('Models', function() {
 				});
 			});
 
+			describe('type', function() {
+				it('Single type', async function() {
+					let results = await Media.search({
+						field: 'plot',
+						search: 'aqua',
+						type: Media.Types().EPISODE
+					});
+
+					expect(results).to.have.length(2);
+					expect(results).to.containSubset([
+						util.flattenEpisode(testdata.s3e1),
+						util.flattenEpisode(testdata.s3e2)
+					]);
+				});
+
+				it('Multiple types', async function() {
+					let results = await Media.search({
+						field: 'title_normalized',
+						search: 'Media',
+						type: [Media.Types().MOVIE, Media.Types().SERIES]
+					});
+
+					expect(results).to.have.length(2);
+					expect(results).to.containSubset([
+						util.flattenMedia(testdata.media1),
+						util.flattenSeries(testdata.series1)
+					]);
+				});
+
+				it('Invalid type', function() {
+					let invalid = 'invalid';
+					return expect(Media.search({
+						field: 'plot',
+						search: 'thing',
+						type: invalid
+					})).to.be.rejectedWith(Error, `Invalid type [${invalid}]`);
+				});
+			});
+
 			it('Invalid field', async function() {
 				let badField = 'bad_field';
 				return expect(Media.search({

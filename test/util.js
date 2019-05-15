@@ -1,8 +1,10 @@
 function flattenMedia(media) {
 	let flat = Object.assign({}, media);
-	delete flat.info.id;
 
-	Object.assign(flat, flat.info);
+	if (flat.info) {
+		delete flat.info.id;
+		Object.assign(flat, flat.info);
+	}
 	delete flat.info_id;
 	delete flat.info;
 	delete flat.files;
@@ -19,6 +21,20 @@ function flattenSeries(series) {
 	delete flat.media;
 	delete flat.episodes;
 	delete flat.media_id;
+	return flat;
+}
+
+function flattenEpisode(episode) {
+	let flat = Object.assign({}, episode);
+
+	// Take Media's id, not Episode id
+	if (flat.media) {
+		let media = flattenMedia(flat.media);
+		Object.assign(flat, media);
+		delete flat.media;
+	}
+	delete flat.media_id;
+	delete flat.series_id;
 	return flat;
 }
 
@@ -44,6 +60,7 @@ function convertDatesHelper(model) {
 module.exports = {
 	flattenMedia: flattenMedia,
 	flattenSeries: flattenSeries,
+	flattenEpisode: flattenEpisode,
 	convertDates: convertDates
 };
 
