@@ -140,10 +140,12 @@ describe('Models', function() {
 								to: new Date('2009-12-31').getTime()
 							}
 						});
-						expect(results).to.have.lengthOf(2);
+						expect(results).to.have.lengthOf(4);
 						expect(results).to.containSubset([
 							util.flattenMedia(testdata.media1),
-							util.flattenMedia(testdata.media2)
+							util.flattenMedia(testdata.media2),
+							util.flattenSeries(testdata.series1),
+							util.flattenEpisode(testdata.s3e6)
 						]);
 					});
 

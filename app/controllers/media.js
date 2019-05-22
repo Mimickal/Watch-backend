@@ -39,9 +39,14 @@ app.get('/media/meta', (req, res) => {
  */
 app.get('/media/search/:search', async (req, res) => {
 	let by = req.query.by;
+	let type = req.query.type || 'all';
 
 	if (!VALID_SEARCH_BY.includes(by)) {
 		return res.status(400).text(`Invalid 'by' field [${by}]`);
+	}
+
+	if (!VALID_TYPES.includes(type)) {
+		return res.status(400).text(`Invalid 'type' field [${type}]`);
 	}
 
 	let search = decodeURI(req.params.search);
@@ -58,9 +63,14 @@ app.get('/media/search/:search', async (req, res) => {
 		};
 	}
 
+	if (type === 'all') {
+		type = null;
+	}
+
 	let media = await Media.search({
 		search: search,
-		field: BY_QUERY_MAP[by] || by // Convert 'by' to Media field to query on
+		field: BY_QUERY_MAP[by] || by, // Convert 'by' to Media field to query on
+		type: type
 	});
 
 	res.status(200).json(media);

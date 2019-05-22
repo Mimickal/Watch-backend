@@ -72,11 +72,13 @@ const media4 = new Media()
 	);
 
 const series1 = new Series()
-	.withEndDate(Date.now())
+	.withEndDate(new Date(Date.now()))
 	.withMedia(new Media()
 		.withTitle('Media for Series 1')
 		.withType(2)
 		.withInfo(new Info()
+			.withImdb()
+			.withReleaseDate(new Date('2009-02-03'))
 			.withPlot('Info about series 1')
 		)
 	)
@@ -118,6 +120,7 @@ const s3e2 = new Episode();
 const s3e3 = new Episode();
 const s3e4 = new Episode();
 const s3e5 = new Episode();
+const s3e6 = new Episode();
 
 const series3 = new Series()
 	.withEndDate(new Date('2015-08-26'))
@@ -229,6 +232,23 @@ const series3 = new Series()
 				)
 			)
 		)
+	)
+	.withEpisode(s3e6
+		.withNumber(6, 2)
+		.withMedia(new Media()
+			.withTitle('Shake Like Me', 'Shake Lke Me')
+			.withType(3)
+			.withRuntime(12)
+			.withAddDate(new Date('2019-05-23'))
+			.withInfo(new Info()
+				.withImdb('tt1373489')
+				.withScore(8.2, null)
+				.withReleaseDate(new Date('2009-04-05'))
+				.withPlot(`After being bitten by a radioactive black man Shake
+					learns what it's like to be a stereotype.`
+				)
+			)
+		)
 	);
 
 // Break nested objects out for seed functions
@@ -246,6 +266,7 @@ module.exports = {
 	s3e3: s3e3,
 	s3e4: s3e4,
 	s3e5: s3e5,
+	s3e6: s3e6,
 
 	mediaInfo: [
 		mediaInfo1,

@@ -81,6 +81,32 @@ describe('media controller', function() {
 			});
 		});
 
+		describe('Filter by type', function() {
+
+			it('invalid type', async function() {
+				let badtype = 'invalid';
+				let res = await chai.request(app)
+					.get(`/media/search/ignore?by=year&type=${badtype}`);
+
+				expect(res.status).to.equal(400);
+				expect(res.text).to.equal(`Invalid 'type' field [${badtype}]`);
+			});
+
+			it('all', async function() {
+				let res = await chai.request(app)
+					.get('/media/search/2009?by=year&type=all');
+
+				expect(res.status).to.equal(200);
+				expect(util.convertDates(res.body)).to.deep.equal([
+					util.flattenMedia(testdata.media1),
+					util.flattenMedia(testdata.media2),
+					util.flattenSeries(testdata.series1),
+					util.flattenEpisode(testdata.s3e6)
+				]);
+			});
+
+		});
+
 	});
 
 });
