@@ -2,8 +2,9 @@ function flattenMedia(media) {
 	let flat = Object.assign({}, media);
 
 	if (flat.info) {
-		delete flat.info.id;
-		Object.assign(flat, flat.info);
+		let info = Object.assign({}, flat.info);
+		delete info.id;
+		Object.assign(flat, info);
 	}
 	delete flat.info_id;
 	delete flat.info;
