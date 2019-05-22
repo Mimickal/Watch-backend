@@ -48,7 +48,7 @@ module.exports = bookshelf.model(NAME, {
 		return VALID_TYPES;
 	},
 	search: async function(args) {
-		if (!args.search) {
+		if (args.search == null) {
 			throw Error('Missing search parameter');
 		}
 

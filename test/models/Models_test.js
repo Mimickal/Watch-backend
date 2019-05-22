@@ -131,6 +131,12 @@ describe('Models', function() {
 					]);
 				});
 
+				// TODO this
+				it.skip('director');
+
+				// TODO implement this
+				it.skip('actors');
+
 				describe('year', function() {
 					it('valid search', async function() {
 						let results = await Media.search({
@@ -167,6 +173,9 @@ describe('Models', function() {
 						);
 					});
 				});
+
+				// TODO and this
+				it.skip('genre');
 
 				it('plot', async function() {
 					let results = await Media.search({
@@ -232,6 +241,18 @@ describe('Models', function() {
 				return expect(Media.search({
 					field: 'title_normalized'
 				})).to.be.rejectedWith(Error, 'Missing search parameter');
+			});
+
+			// FIXME order is wrong here. Order insensitive comparison?
+			it.skip('Defined but empty search ok', async function() {
+				let results = await Media.search({
+					field: 'title_normalized',
+					search: ''
+				});
+
+				expect(results).to.deep.equal(
+					testdata.media.map(util.flattenMedia)
+				);
 			});
 		});
 	});

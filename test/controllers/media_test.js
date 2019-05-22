@@ -79,6 +79,13 @@ describe('media controller', function() {
 					util.flattenEpisode(testdata.s3e1)
 				]);
 			});
+
+			it.skip('director');
+
+			it.skip('actors');
+
+			it.skip('genre');
+
 		});
 
 		describe('Filter by type', function() {
