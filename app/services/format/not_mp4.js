@@ -42,14 +42,17 @@ var parser = new argParser({
 parser.addArgument([ "-r", "--recursive" ],
 	{ help: "Scan directories recursively.",
 	action: "storeConst", constant: true, defaultValue: false });
-parser.addArgument([ "top_directory" ],
-	{ help: "The directory to scan." });
+parser.addArgument([ "directories" ],
+	{ help: "Directories to scan.",
+	nargs: "+" });
 
 const args = parser.parseArgs();
 
-walkDir(args.top_directory, args.recursive, foundPath => {
-	if (!endsWithFromArr(foundPath, allowedExtensions)
-	&&  !endsWithFromArr(foundPath, ignoredExtensions)) {
-		console.log(foundPath);
-	}
+args.directories.forEach( d => {
+	walkDir(d, args.recursive, foundPath => {
+		if (!endsWithFromArr(foundPath, allowedExtensions)
+		&&  !endsWithFromArr(foundPath, ignoredExtensions)) {
+			console.log(foundPath);
+		}
+	})
 })
