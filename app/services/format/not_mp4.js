@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path');
+const argParser = require('argparse').ArgumentParser;
 
 function walkDir(dir, callback) {
 	fs.readdirSync(dir).forEach( f => {
@@ -29,13 +30,18 @@ const ignoredExtensions = [
 
 // Actual script execution starts here
 
-const argv = process.argv.slice(2);
+var parser = new argParser({
+  version: '0.0.0',
+  addHelp: true,
+  description: "Find files that don't have the .mp4 extension at the end of their name."
+});
+parser.addArgument([ "top_directory" ], { help: "The directory to scan." });
 
-argv.forEach(directory => {
-	walkDir(directory, foundPath => {
-		if (!endsWithFromArr(foundPath, allowedExtensions)
-		&&  !endsWithFromArr(foundPath, ignoredExtensions)) {
-			console.log(foundPath);
-		}
-	})
+const args = parser.parseArgs();
+
+walkDir(args.top_directory, foundPath => {
+	if (!endsWithFromArr(foundPath, allowedExtensions)
+	&&  !endsWithFromArr(foundPath, ignoredExtensions)) {
+		console.log(foundPath);
+	}
 })
