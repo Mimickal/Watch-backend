@@ -35,7 +35,7 @@ const ignoredExtensions = [
 // Actual script execution starts here
 
 var parser = new argParser({
-  version: '0.0.0',
+  version: '0.4.0',
   addHelp: true,
   description: "Find files that don't have the .mp4 extension at the end of their name."
 });
